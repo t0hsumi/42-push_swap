@@ -1,13 +1,21 @@
 #include <push_swap.h>
 
-void stacks_init(stacks_t *s) {
+void stacks_init(stacks_t *s, int argc) {
 	if ((void *)s==NULL) {
 		exit(EXIT_FAILURE);
 	}
 	s->stack_a = malloc(sizeof(dllist_t));
+	if (s->stack_a == NULL) {
+		exit(EXIT_FAILURE);
+	}
 	s->stack_b = malloc(sizeof(dllist_t));
+	if (s->stack_b == NULL) {
+		exit(EXIT_FAILURE);
+	}
 	dllist_init(s->stack_a, sizeof(int));
 	dllist_init(s->stack_b, sizeof(int));
+	s->num = (int *)malloc(sizeof(int) * (argc-2));
+	if (s->num == NULL) exit(EXIT_FAILURE);
 }
 
 void stacks_dispose(stacks_t *s) {
@@ -17,6 +25,8 @@ void stacks_dispose(stacks_t *s) {
 	s->stack_a = NULL;
 	free(s->stack_b);
 	s->stack_b = NULL;
+	free(s->num);
+	s->num = NULL;
 }
 
 void stacks_sa(stacks_t *s) {
