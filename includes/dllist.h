@@ -24,6 +24,7 @@ typedef struct dllist_t {
 
 void dllist_init(dllist_t *l, size_t elem_size);
 void dllist_addlast(dllist_t *l, void *elem);
+void dllist_addtop(dllist_t *l, void *elem);
 void dllist_swaptop(dllist_t *l);
 void dllist_rotate(dllist_t *l);
 void dllist_r_rotate(dllist_t *l);
