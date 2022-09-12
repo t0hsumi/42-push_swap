@@ -31,4 +31,10 @@ fclean: clean
 
 re: fclean all
 
+debug: CFLAGS += -fsanitize=address $(DEBUG_FLAGS)
+debug: re
+
+leak: CFLAGS += $(DEBUG_FLAGS)
+leak: re
+
 PHONY: all clean fclean re
