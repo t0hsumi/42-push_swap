@@ -34,6 +34,7 @@ void stacks_dispose(stacks_t *s);
 
 void a_to_b(stacks_t *s);
 void b_to_a(stacks_t *s);
+void sol_optimize(stacks_t *s);
 
 void stacks_sa(stacks_t *s);
 void stacks_sb(stacks_t *s);

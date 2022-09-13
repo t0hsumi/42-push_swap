@@ -31,6 +31,7 @@ int main(int argc, char **argv) {
 	s.stacksize = argc-1;
 	a_to_b(&s);
 	b_to_a(&s);
+	sol_optimize(&s);
 	print_sol(&s);
 	stacks_dispose(&s);
 }

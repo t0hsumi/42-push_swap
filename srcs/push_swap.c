@@ -49,33 +49,29 @@ void a_to_b(stacks_t *s) {
 void b_to_a(stacks_t *s) {
 	int i = s->stacksize - 1;
 	int down = 0;
-	//printf("init\n");
-	//print(s);
+	int cur_ra = 0;
 
 	while (s->stack_b->length) {
 		int tmp = *(int *)s->stack_b->dummy->next->data;
+		if (cur_ra > 0) {
+			while (cur_ra--) {
+				stacks_ra(s);
+			}
+		}
 		if (tmp == s->num[i]) {
 			stacks_pa(s);
-			//printf("first cond : pa\n");
-			//print(s);
 			i--;
 			while (down > 0 && i >= 0 && s->stack_a->dummy->prev->data && s->num[i]==*(int *)s->stack_a->dummy->prev->data) {
 				stacks_rra(s);
-				//printf("first cond : rra\n");
-				//print(s);
 				down--;
 				i--;
 			}
 		} else if (s->stack_a->length == 0){
 			stacks_pa(s);
-			//printf("second cond : pa\n");
-			//print(s);
 			down++;
 		} else if (down == 0 || tmp > *(int *)s->stack_a->dummy->prev->data){
 			stacks_pa(s);
 			stacks_ra(s);
-			//printf("third cond : pa ra\n");
-			//print(s);
 			down++;
 		} else {
 			int j = 1;
@@ -91,26 +87,15 @@ void b_to_a(stacks_t *s) {
 				while (k--)
 					stacks_rra(s);
 				stacks_pa(s);
-				//printf("forth cond down : rra* + pa\n");
-				//print(s);
-				k = down+1;
-				while (k--) {
-					stacks_ra(s);
-				}
+				cur_ra = down+1;
 			} else {
 				int k = j - 1;
 				while (k--) {
 					stacks_rra(s);
 				}
 				stacks_pa(s);
-				//printf("forth cond : rra* + pa\n");
-				//print(s);
-				while (j--) {
-					stacks_ra(s);
-				}
+				cur_ra = j;
 			}
-			//printf("forth cond : last\n");
-			//print(s);
 			down++;
 		}
 	}
@@ -155,18 +140,24 @@ void stacks_dispose(stacks_t *s) {
 
 void stacks_sa(stacks_t *s) {
 	enum instruction cur = sa;
+	if (s->stack_a->length <= 1)
+		return;
 	dllist_swaptop(s->stack_a);
 	dllist_addlast(s->solution, &cur);
 }
 
 void stacks_sb(stacks_t *s) {
 	enum instruction cur = sb;
+	if (s->stack_b->length <= 1)
+		return;
 	dllist_swaptop(s->stack_b);
 	dllist_addlast(s->solution, &cur);
 }
 
 void stacks_ss(stacks_t *s) {
 	enum instruction cur = ss;
+	if (s->stack_a->length <= 1 && s->stack_a->length <= 1)
+		return;
 	stacks_sa(s);
 	stacks_sb(s);
 	dllist_addlast(s->solution, &cur);
@@ -174,18 +165,24 @@ void stacks_ss(stacks_t *s) {
 
 void stacks_ra(stacks_t *s) {
 	enum instruction cur = ra;
+	if (s->stack_a->length <= 1)
+		return;
 	dllist_rotate(s->stack_a);
 	dllist_addlast(s->solution, &cur);
 }
 
 void stacks_rb(stacks_t *s) {
 	enum instruction cur = rb;
+	if (s->stack_b->length <= 1)
+		return;
 	dllist_rotate(s->stack_b);
 	dllist_addlast(s->solution, &cur);
 }
 
 void stacks_rr(stacks_t *s) {
 	enum instruction cur = rr;
+	if (s->stack_a->length <= 1 && s->stack_a->length <= 1)
+		return;
 	stacks_ra(s);
 	stacks_rb(s);
 	dllist_addlast(s->solution, &cur);
@@ -193,11 +190,15 @@ void stacks_rr(stacks_t *s) {
 
 void stacks_rra(stacks_t *s) {
 	enum instruction cur = rra;
+	if (s->stack_a->length <= 1)
+		return;
 	dllist_r_rotate(s->stack_a);
 	dllist_addlast(s->solution, &cur);
 }
 
 void stacks_rrb(stacks_t *s) {
+	if (s->stack_b->length <= 1)
+		return;
 	enum instruction cur = rrb;
 	dllist_r_rotate(s->stack_b);
 	dllist_addlast(s->solution, &cur);
@@ -205,6 +206,8 @@ void stacks_rrb(stacks_t *s) {
 
 void stacks_rrr(stacks_t *s) {
 	enum instruction cur = rrr;
+	if (s->stack_a->length <= 1 && s->stack_a->length <= 1)
+		return;
 	stacks_rra(s);
 	stacks_rrb(s);
 	dllist_addlast(s->solution, &cur);
