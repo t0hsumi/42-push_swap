@@ -132,6 +132,16 @@ void dllist_removetop(dllist_t *l, void *elem_out) {
 	node = NULL;
 }
 
+void dllist_remove(dllist_t *l, dlnode_t *cur) {
+	cur->prev->next = cur->next;
+	cur->next->prev = cur->prev;
+	--l->length;
+	free(cur->data);
+	cur->data = NULL;
+	free(cur);
+	cur = NULL;
+}
+
 void dllist_dispose(dllist_t *l) {
 	dlnode_t *node;
 	dlnode_t *old_node;

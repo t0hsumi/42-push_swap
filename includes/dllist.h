@@ -29,6 +29,7 @@ void dllist_swaptop(dllist_t *l);
 void dllist_rotate(dllist_t *l);
 void dllist_r_rotate(dllist_t *l);
 void dllist_removetop(dllist_t *l, void *elem_out);
+void dllist_remove(dllist_t *l, dlnode_t *cur);
 void dllist_dispose(dllist_t *l);
 
 #endif
