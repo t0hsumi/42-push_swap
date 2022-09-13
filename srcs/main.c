@@ -3,33 +3,14 @@
 #include <stdio.h>
 #include <push_swap.h>
 
-void print_dllist(dllist_t *l) {
-	dlnode_t *cur = l->dummy->next;
-	while (cur != l->dummy) {
-		printf("%d ", *(int *)(cur->data));
+void print_sol(stacks_t *s) {
+	dlnode_t *cur = s->solution->dummy->next;
+	char *inst[11] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n", "rb\n", "rr\n", "rra\n", "rrb\n", "rrr"};
+	while (cur != s->solution->dummy) {
+		enum instruction tmp = *(enum instruction *)cur->data;
+		printf("%s", inst[tmp]);
 		cur = cur->next;
 	}
-	printf("\n");
-}
-
-void print(stacks_t *s) {
-	printf("a : ");
-	print_dllist(s->stack_a);
-	printf("b : ");
-	print_dllist(s->stack_b);
-}
-
-long ft_atoi(const char *s) {
-	int i = 0;
-	long res = 0;
-	while (s[i]) {
-		if ('0' <= s[i] && s[i] <= '9') {
-			res *= 10;
-			res += (long)(s[i] - '0');
-		}
-		i++;
-	}
-	return res;
 }
 
 int main(int argc, char **argv) {
@@ -42,15 +23,15 @@ int main(int argc, char **argv) {
 		s.num[i-1] = tmp;
 	}
 	quicksort(s.num, 0, argc-1);
-	for (int i = 0; i < argc-1; i++) {
-		printf("%d ", s.num[i]);
-	}
-	printf("\n");
 	if (argc-1 <= 10) s.n = 5;
 	else if (argc-1 <= 150) s.n = 8;
 	else s.n = 18;
-	s.middle = (s.num[0]+s.num[argc-2])/2;
+	s.middleindex = (argc-1)/2;
 	s.chunksize = (argc-1)/s.n;
+	s.stacksize = argc-1;
+	a_to_b(&s);
+	b_to_a(&s);
+	print_sol(&s);
 	stacks_dispose(&s);
 }
 

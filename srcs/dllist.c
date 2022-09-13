@@ -90,6 +90,7 @@ void dllist_swaptop(dllist_t *l) {
 }
 
 void dllist_rotate(dllist_t *l) {
+	if (l->length <= 1) return;
 	dlnode_t *right = l->dummy->next->next;
 	dlnode_t *left = l->dummy->prev;
 
@@ -102,6 +103,7 @@ void dllist_rotate(dllist_t *l) {
 }
 
 void dllist_r_rotate(dllist_t *l) {
+	if (l->length <= 1) return;
 	dlnode_t *right = l->dummy->next;
 	dlnode_t *left = l->dummy->prev->prev;
 
