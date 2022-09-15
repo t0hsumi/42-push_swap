@@ -1,21 +1,4 @@
 #include <push_swap.h>
-#include <stdio.h>
-
-void print_dllist(dllist_t *l) {
-	dlnode_t *cur = l->dummy->next;
-	while (cur != l->dummy) {
-		printf("%d ", *(int *)(cur->data));
-		cur = cur->next;
-	}
-	printf("\n");
-}
-
-void print(stacks_t *s) {
-	printf("a : ");
-	print_dllist(s->stack_a);
-	printf("b : ");
-	print_dllist(s->stack_b);
-}
 
 void a_to_b(stacks_t *s) {
 	int start = s->middleindex - s->chunksize;
@@ -79,9 +62,6 @@ void b_to_a(stacks_t *s) {
 		} else if (i > 0 && s->num[i-1] == tmp) {
 			stacks_pa(s);
 			up = 1;
-		} else if (s->stack_a->length == 0){
-			stacks_pa(s);
-			down++;
 		} else if (down == 0 || tmp > *(int *)s->stack_a->dummy->prev->data){
 			stacks_pa(s);
 			stacks_ra(s);
@@ -102,7 +82,7 @@ void b_to_a(stacks_t *s) {
 				up--;
 				i--;
 			}
-			while (down > 0 && i >= 0 && s->stack_a->dummy->prev->data && s->num[i]==*(int *)s->stack_a->dummy->prev->data) {
+			while (down > 0 && i >= 0 && s->num[i]==*(int *)s->stack_a->dummy->prev->data) {
 				stacks_rra(s);
 				down--;
 				i--;
@@ -229,7 +209,7 @@ void stacks_pa(stacks_t *s) {
 
 	if (s->stack_b->length == 0)
 		return;
-	dllist_removetop(s->stack_b, &elem_out);
+	dllist_remove(s->stack_b, s->stack_b->dummy->next, &elem_out);
 	dllist_addtop(s->stack_a, &elem_out);
 	dllist_addlast(s->solution, &cur);
 }
@@ -240,7 +220,7 @@ void stacks_pb(stacks_t *s) {
 
 	if (s->stack_a->length == 0)
 		return;
-	dllist_removetop(s->stack_a, &elem_out);
-	dllist_addlast(s->solution, &cur);
+	dllist_remove(s->stack_a, s->stack_a->dummy->next, &elem_out);
 	dllist_addtop(s->stack_b, &elem_out);
+	dllist_addlast(s->solution, &cur);
 }

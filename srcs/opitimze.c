@@ -3,6 +3,7 @@
 static void ra_rb(stacks_t *s) {
 	dlnode_t *cur = s->solution->dummy->next;
 	enum instruction RR = rr;
+	int elem_out;
 
 	while (cur != s->solution->dummy) {
 		if (*(enum instruction *)cur->data == ra) {
@@ -22,7 +23,7 @@ static void ra_rb(stacks_t *s) {
 					break;
 			}
 			if (flag) {
-				dllist_remove(s->solution, tmp);
+				dllist_remove(s->solution, tmp, &elem_out);
 				memcpy(cur->data, &RR, s->solution->elem_size);
 			}
 		}
@@ -33,6 +34,7 @@ static void ra_rb(stacks_t *s) {
 static void rb_ra(stacks_t *s) {
 	dlnode_t *cur = s->solution->dummy->next;
 	enum instruction RR = rr;
+	int elem_out;
 
 	while (cur != s->solution->dummy) {
 		if (*(enum instruction *)cur->data == rb) {
@@ -52,7 +54,7 @@ static void rb_ra(stacks_t *s) {
 					break;
 			}
 			if (flag) {
-				dllist_remove(s->solution, tmp);
+				dllist_remove(s->solution, tmp, &elem_out);
 				memcpy(cur->data, &RR, s->solution->elem_size);
 			}
 		}
@@ -62,6 +64,7 @@ static void rb_ra(stacks_t *s) {
 
 static void rra_ra(stacks_t *s) {
 	dlnode_t *cur = s->solution->dummy->next;
+	int elem_out;
 
 	while (cur != s->solution->dummy) {
 		if (*(enum instruction *)cur->data == rra) {
@@ -81,8 +84,8 @@ static void rra_ra(stacks_t *s) {
 			}
 			if (flag) {
 				cur = cur->prev;
-				dllist_remove(s->solution, tmp);
-				dllist_remove(s->solution, cur->next);
+				dllist_remove(s->solution, tmp, &elem_out);
+				dllist_remove(s->solution, cur->next, &elem_out);
 			}
 		}
 		cur = cur->next;
@@ -91,6 +94,7 @@ static void rra_ra(stacks_t *s) {
 
 static void ra_rra(stacks_t *s) {
 	dlnode_t *cur = s->solution->dummy->next;
+	int elem_out;
 
 	while (cur != s->solution->dummy) {
 		if (*(enum instruction *)cur->data == ra) {
@@ -110,8 +114,8 @@ static void ra_rra(stacks_t *s) {
 			}
 			if (flag) {
 				cur = cur->prev;
-				dllist_remove(s->solution, tmp);
-				dllist_remove(s->solution, cur->next);
+				dllist_remove(s->solution, tmp, &elem_out);
+				dllist_remove(s->solution, cur->next, &elem_out);
 			}
 		}
 		cur = cur->next;

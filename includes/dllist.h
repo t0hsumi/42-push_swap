@@ -7,8 +7,14 @@
 #include <string.h>
 
 #define INIT_ERR_MSG "dllist_init : invalid argument to function input"
-#define ADD_ERR_MSG "dllist_addlast : invalid argument to function input"
+#define ADDTOP_ERR_MSG "dllist_addtop : invalid argument to function input"
+#define ADDLAST_ERR_MSG "dllist_addlast : invalid argument to function input"
 #define SWAP_ERR_MSG "dllist_swaptop : invalid argument to function input"
+#define ROTATE_ERR_MSG "dllist_rotate : invalid argument to function input"
+#define R_ROTATE_ERR_MSG "dllist_r_rotate : invalid argument to function input"
+#define REMOVETOP_ERR_MSG "dllist_remove_top : invalid argument to function input"
+#define REMOVE_ERR_MSG "dllist_remove : invalid argument to function input"
+#define DISPOSE_ERR_MSG "dllist_dispose : invalid argument to function input"
 
 typedef struct dlnode_t {
 	void *data;
@@ -28,8 +34,7 @@ void dllist_addtop(dllist_t *l, void *elem);
 void dllist_swaptop(dllist_t *l);
 void dllist_rotate(dllist_t *l);
 void dllist_r_rotate(dllist_t *l);
-void dllist_removetop(dllist_t *l, void *elem_out);
-void dllist_remove(dllist_t *l, dlnode_t *cur);
+void dllist_remove(dllist_t *l, dlnode_t *cur, void *elem_out);
 void dllist_dispose(dllist_t *l);
 
 #endif

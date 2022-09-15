@@ -22,7 +22,7 @@ void dllist_addtop(dllist_t *l, void *elem) {
 	dlnode_t *node;
 
 	if ((void *)l == NULL || elem == NULL) {
-		write(2, ADD_ERR_MSG, sizeof(ADD_ERR_MSG));
+		write(2, ADDTOP_ERR_MSG, sizeof(ADDTOP_ERR_MSG));
 		exit(EXIT_FAILURE);
 	}
 	node = malloc(sizeof(dlnode_t));
@@ -49,7 +49,7 @@ void dllist_addlast(dllist_t *l, void *elem) {
 	dlnode_t *node;
 
 	if ((void *)l == NULL || elem == NULL) {
-		write(2, ADD_ERR_MSG, sizeof(ADD_ERR_MSG));
+		write(2, ADDLAST_ERR_MSG, sizeof(ADDLAST_ERR_MSG));
 		exit(EXIT_FAILURE);
 	}
 	node = malloc(sizeof(dlnode_t));
@@ -90,6 +90,10 @@ void dllist_swaptop(dllist_t *l) {
 }
 
 void dllist_rotate(dllist_t *l) {
+	if ((void *)l == NULL) {
+		write(2, ROTATE_ERR_MSG , sizeof(ROTATE_ERR_MSG));
+		exit(EXIT_FAILURE);
+	}
 	if (l->length <= 1) return;
 	dlnode_t *right = l->dummy->next->next;
 	dlnode_t *left = l->dummy->prev;
@@ -103,6 +107,10 @@ void dllist_rotate(dllist_t *l) {
 }
 
 void dllist_r_rotate(dllist_t *l) {
+	if ((void *)l == NULL) {
+		write(2, R_ROTATE_ERR_MSG , sizeof(R_ROTATE_ERR_MSG));
+		exit(EXIT_FAILURE);
+	}
 	if (l->length <= 1) return;
 	dlnode_t *right = l->dummy->next;
 	dlnode_t *left = l->dummy->prev->prev;
@@ -115,26 +123,18 @@ void dllist_r_rotate(dllist_t *l) {
 	right->prev->prev = l->dummy;
 }
 
-void dllist_removetop(dllist_t *l, void *elem_out) {
+void dllist_remove(dllist_t *l, dlnode_t *cur, void *elem_out) {
+	if ((void *)l == NULL || elem_out == NULL) {
+		write(2, REMOVE_ERR_MSG , sizeof(REMOVE_ERR_MSG));
+		exit(EXIT_FAILURE);
+	}
 	if (l->length == 0) {
 		elem_out = NULL;
 		return;
 	}
-	dlnode_t * node = l->dummy->next;
-
-	node->prev->next = node->next;
-	node->next->prev = node->prev;
-	memcpy(elem_out, node->data, l->elem_size);
-	--l->length;
-	free(node->data);
-	node->data = NULL;
-	free(node);
-	node = NULL;
-}
-
-void dllist_remove(dllist_t *l, dlnode_t *cur) {
 	cur->prev->next = cur->next;
 	cur->next->prev = cur->prev;
+	memcpy(elem_out, cur->data, l->elem_size);
 	--l->length;
 	free(cur->data);
 	cur->data = NULL;
@@ -146,6 +146,10 @@ void dllist_dispose(dllist_t *l) {
 	dlnode_t *node;
 	dlnode_t *old_node;
 
+	if ((void *)l == NULL) {
+		write(2, DISPOSE_ERR_MSG , sizeof(DISPOSE_ERR_MSG));
+		exit(EXIT_FAILURE);
+	}
 	node = l->dummy->next;
 	while (node != l->dummy) {
 		free(node->data);
