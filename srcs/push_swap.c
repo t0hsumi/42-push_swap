@@ -49,23 +49,36 @@ void a_to_b(stacks_t *s) {
 void b_to_a(stacks_t *s) {
 	int i = s->stacksize - 1;
 	int down = 0;
-	int cur_ra = 0;
+	int up = 0;
 
 	while (s->stack_b->length) {
 		int tmp = *(int *)s->stack_b->dummy->next->data;
-		if (cur_ra > 0) {
-			while (cur_ra--) {
-				stacks_ra(s);
-			}
+
+		size_t b_max_index = 0;
+		dlnode_t *cur = s->stack_b->dummy->next;
+		while (cur->data != NULL) {
+			if (*(int *)cur->data == s->num[i])
+				break;
+			b_max_index++;
+			cur = cur->next;
 		}
+
 		if (tmp == s->num[i]) {
 			stacks_pa(s);
 			i--;
-			while (down > 0 && i >= 0 && s->stack_a->dummy->prev->data && s->num[i]==*(int *)s->stack_a->dummy->prev->data) {
+			if (up) {
+				stacks_sa(s);
+				up--;
+				i--;
+			}
+			while (down > 0 && i >= 0 && s->num[i]==*(int *)s->stack_a->dummy->prev->data) {
 				stacks_rra(s);
 				down--;
 				i--;
 			}
+		} else if (i > 0 && s->num[i-1] == tmp) {
+			stacks_pa(s);
+			up = 1;
 		} else if (s->stack_a->length == 0){
 			stacks_pa(s);
 			down++;
@@ -74,29 +87,26 @@ void b_to_a(stacks_t *s) {
 			stacks_ra(s);
 			down++;
 		} else {
-			int j = 1;
-			dlnode_t *cur = s->stack_a->dummy->prev;
-			while (j <= down) {
-				if (*(int *)cur->data < tmp)
-					break;
-				j++;
-				cur = cur->prev;
-			}
-			if (j == down+1) {
-				int k = down;
-				while (k--)
-					stacks_rra(s);
-				stacks_pa(s);
-				cur_ra = down+1;
+			if (b_max_index < s->stack_b->length / 2) {
+				while (b_max_index--)
+					stacks_rb(s);
 			} else {
-				int k = j - 1;
-				while (k--) {
-					stacks_rra(s);
-				}
-				stacks_pa(s);
-				cur_ra = j;
+				b_max_index = s->stack_b->length - b_max_index;
+				while (b_max_index--)
+					stacks_rrb(s);
 			}
-			down++;
+			stacks_pa(s);
+			i--;
+			if (up) {
+				stacks_sa(s);
+				up--;
+				i--;
+			}
+			while (down > 0 && i >= 0 && s->stack_a->dummy->prev->data && s->num[i]==*(int *)s->stack_a->dummy->prev->data) {
+				stacks_rra(s);
+				down--;
+				i--;
+			}
 		}
 	}
 }
