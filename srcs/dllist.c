@@ -1,4 +1,5 @@
 #include <dllist.h>
+#include <utils.h>
 
 void dllist_init(dllist_t *l, size_t elem_size) {
 	if ((void *)l == NULL || elem_size <= 0) {
@@ -42,7 +43,7 @@ void dllist_addtop(dllist_t *l, void *elem) {
 	node->next->prev = node;
 
 	++l->length;
-	memcpy(node->data, elem, l->elem_size);
+	ft_memcpy(node->data, elem, l->elem_size);
 }
 
 void dllist_addlast(dllist_t *l, void *elem) {
@@ -69,7 +70,7 @@ void dllist_addlast(dllist_t *l, void *elem) {
 	l->dummy->prev = node;
 
 	++l->length;
-	memcpy(node->data, elem, l->elem_size);
+	ft_memcpy(node->data, elem, l->elem_size);
 }
 
 void dllist_swaptop(dllist_t *l) {
@@ -134,7 +135,7 @@ void dllist_remove(dllist_t *l, dlnode_t *cur, void *elem_out) {
 	}
 	cur->prev->next = cur->next;
 	cur->next->prev = cur->prev;
-	memcpy(elem_out, cur->data, l->elem_size);
+	ft_memcpy(elem_out, cur->data, l->elem_size);
 	--l->length;
 	free(cur->data);
 	cur->data = NULL;

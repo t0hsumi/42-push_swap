@@ -1,4 +1,5 @@
 #include <push_swap.h>
+#include <utils.h>
 
 static void ra_rb(stacks_t *s) {
 	dlnode_t *cur = s->solution->dummy->next;
@@ -24,7 +25,7 @@ static void ra_rb(stacks_t *s) {
 			}
 			if (flag) {
 				dllist_remove(s->solution, tmp, &elem_out);
-				memcpy(cur->data, &RR, s->solution->elem_size);
+				ft_memcpy(cur->data, &RR, s->solution->elem_size);
 			}
 		}
 		cur = cur->next;
@@ -55,7 +56,7 @@ static void rra_rrb(stacks_t *s) {
 			}
 			if (flag) {
 				dllist_remove(s->solution, tmp, &elem_out);
-				memcpy(cur->data, &RRR, s->solution->elem_size);
+				ft_memcpy(cur->data, &RRR, s->solution->elem_size);
 			}
 		}
 		cur = cur->next;
@@ -86,7 +87,7 @@ static void rb_ra(stacks_t *s) {
 			}
 			if (flag) {
 				dllist_remove(s->solution, tmp, &elem_out);
-				memcpy(cur->data, &RR, s->solution->elem_size);
+				ft_memcpy(cur->data, &RR, s->solution->elem_size);
 			}
 		}
 		cur = cur->next;
