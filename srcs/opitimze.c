@@ -31,6 +31,37 @@ static void ra_rb(stacks_t *s) {
 	}
 }
 
+static void rra_rrb(stacks_t *s) {
+	dlnode_t *cur = s->solution->dummy->next;
+	enum instruction RRR = rrr;
+	int elem_out;
+
+	while (cur != s->solution->dummy) {
+		if (*(enum instruction *)cur->data == rra) {
+			int flag = 0;
+			dlnode_t *tmp = cur->next;
+			while (tmp != s->solution->dummy) {
+				enum instruction inst = *(enum instruction *)tmp->data;
+				if (inst == rrb) {
+					flag = 1;
+					break;
+				}
+				else if (inst == sa || inst == ra || inst == rra){
+					tmp = tmp->next;
+					continue;
+				}
+				else
+					break;
+			}
+			if (flag) {
+				dllist_remove(s->solution, tmp, &elem_out);
+				memcpy(cur->data, &RRR, s->solution->elem_size);
+			}
+		}
+		cur = cur->next;
+	}
+}
+
 static void rb_ra(stacks_t *s) {
 	dlnode_t *cur = s->solution->dummy->next;
 	enum instruction RR = rr;
@@ -127,5 +158,6 @@ void sol_optimize(stacks_t *s) {
 	rb_ra(s);
 	ra_rra(s);
 	rra_ra(s);
+	rra_rrb(s);
 	return;
 }
