@@ -3,6 +3,8 @@
 
 #include <dllist.h>
 
+#define INPUT_ERR "invalid argument to function input"
+
 typedef struct stacks_t {
 	dllist_t *stack_a;
 	dllist_t *stack_b;

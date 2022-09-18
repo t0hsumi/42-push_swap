@@ -130,6 +130,11 @@ void stacks_dispose(stacks_t *s) {
 
 void stacks_sa(stacks_t *s) {
 	enum instruction cur = sa;
+
+	if ((void *)s == NULL) {
+		write(2, INPUT_ERR, sizeof(INPUT_ERR));
+		exit(EXIT_FAILURE);
+	}
 	if (s->stack_a->length <= 1)
 		return;
 	dllist_swaptop(s->stack_a);
@@ -138,6 +143,11 @@ void stacks_sa(stacks_t *s) {
 
 void stacks_sb(stacks_t *s) {
 	enum instruction cur = sb;
+
+	if ((void *)s == NULL) {
+		write(2, INPUT_ERR, sizeof(INPUT_ERR));
+		exit(EXIT_FAILURE);
+	}
 	if (s->stack_b->length <= 1)
 		return;
 	dllist_swaptop(s->stack_b);
@@ -146,6 +156,11 @@ void stacks_sb(stacks_t *s) {
 
 void stacks_ss(stacks_t *s) {
 	enum instruction cur = ss;
+
+	if ((void *)s == NULL) {
+		write(2, INPUT_ERR, sizeof(INPUT_ERR));
+		exit(EXIT_FAILURE);
+	}
 	if (s->stack_a->length <= 1 && s->stack_a->length <= 1)
 		return;
 	stacks_sa(s);
@@ -155,6 +170,11 @@ void stacks_ss(stacks_t *s) {
 
 void stacks_ra(stacks_t *s) {
 	enum instruction cur = ra;
+
+	if ((void *)s == NULL) {
+		write(2, INPUT_ERR, sizeof(INPUT_ERR));
+		exit(EXIT_FAILURE);
+	}
 	if (s->stack_a->length <= 1)
 		return;
 	dllist_rotate(s->stack_a);
@@ -163,6 +183,11 @@ void stacks_ra(stacks_t *s) {
 
 void stacks_rb(stacks_t *s) {
 	enum instruction cur = rb;
+
+	if ((void *)s == NULL) {
+		write(2, INPUT_ERR, sizeof(INPUT_ERR));
+		exit(EXIT_FAILURE);
+	}
 	if (s->stack_b->length <= 1)
 		return;
 	dllist_rotate(s->stack_b);
@@ -171,6 +196,11 @@ void stacks_rb(stacks_t *s) {
 
 void stacks_rr(stacks_t *s) {
 	enum instruction cur = rr;
+
+	if ((void *)s == NULL) {
+		write(2, INPUT_ERR, sizeof(INPUT_ERR));
+		exit(EXIT_FAILURE);
+	}
 	if (s->stack_a->length <= 1 && s->stack_a->length <= 1)
 		return;
 	stacks_ra(s);
@@ -180,6 +210,11 @@ void stacks_rr(stacks_t *s) {
 
 void stacks_rra(stacks_t *s) {
 	enum instruction cur = rra;
+
+	if ((void *)s == NULL) {
+		write(2, INPUT_ERR, sizeof(INPUT_ERR));
+		exit(EXIT_FAILURE);
+	}
 	if (s->stack_a->length <= 1)
 		return;
 	dllist_r_rotate(s->stack_a);
@@ -187,15 +222,25 @@ void stacks_rra(stacks_t *s) {
 }
 
 void stacks_rrb(stacks_t *s) {
+	enum instruction cur = rrb;
+
+	if ((void *)s == NULL) {
+		write(2, INPUT_ERR, sizeof(INPUT_ERR));
+		exit(EXIT_FAILURE);
+	}
 	if (s->stack_b->length <= 1)
 		return;
-	enum instruction cur = rrb;
 	dllist_r_rotate(s->stack_b);
 	dllist_addlast(s->solution, &cur);
 }
 
 void stacks_rrr(stacks_t *s) {
 	enum instruction cur = rrr;
+
+	if ((void *)s == NULL) {
+		write(2, INPUT_ERR, sizeof(INPUT_ERR));
+		exit(EXIT_FAILURE);
+	}
 	if (s->stack_a->length <= 1 && s->stack_a->length <= 1)
 		return;
 	stacks_rra(s);
@@ -207,6 +252,10 @@ void stacks_pa(stacks_t *s) {
 	enum instruction cur = pa;
 	int elem_out;
 
+	if ((void *)s == NULL) {
+		write(2, INPUT_ERR, sizeof(INPUT_ERR));
+		exit(EXIT_FAILURE);
+	}
 	if (s->stack_b->length == 0)
 		return;
 	dllist_remove(s->stack_b, s->stack_b->dummy->next, &elem_out);
@@ -218,6 +267,10 @@ void stacks_pb(stacks_t *s) {
 	enum instruction cur = pb;
 	int elem_out;
 
+	if ((void *)s == NULL) {
+		write(2, INPUT_ERR, sizeof(INPUT_ERR));
+		exit(EXIT_FAILURE);
+	}
 	if (s->stack_a->length == 0)
 		return;
 	dllist_remove(s->stack_a, s->stack_a->dummy->next, &elem_out);
