@@ -3,16 +3,6 @@
 #include <stdio.h>
 #include <push_swap.h>
 
-void print_sol(stacks_t *s) {
-	dlnode_t *cur = s->solution->dummy->next;
-	char *inst[11] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n", "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
-	while (cur != s->solution->dummy) {
-		enum instruction tmp = *(enum instruction *)cur->data;
-		write(1, inst[tmp], ft_strlen(inst[tmp]));
-		cur = cur->next;
-	}
-}
-
 int main(int argc, char **argv) {
 	stacks_t s;
 	
