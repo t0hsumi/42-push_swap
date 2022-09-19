@@ -1,4 +1,3 @@
-#include <utils.h>
 #include <push_swap.h>
 
 int main(int argc, char **argv) {
@@ -6,8 +5,7 @@ int main(int argc, char **argv) {
 	
 	stacks_init(&s, argc);
 	load_args(&s, argc, argv);
-	a_to_b(&s);
-	b_to_a(&s);
+	sort_stacks(&s);
 	sol_optimize(&s);
 	print_sol(&s);
 	stacks_dispose(&s);

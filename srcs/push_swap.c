@@ -11,7 +11,8 @@ void load_args(stacks_t *s, int argc, char **argv) {
 	while (++i < argc) {
 		arg_num = ft_atoi(argv[i]);
 		if (arg_num == LONG_MIN) {
-			write(1, "Error\n", 6);
+			write(2, "Error\n", 6);
+			stacks_dispose(s);
 			exit(EXIT_FAILURE);
 		}
 		tmp = (int)arg_num;
@@ -21,7 +22,7 @@ void load_args(stacks_t *s, int argc, char **argv) {
 	quicksort(s->num, 0, argc-1);
 }
 
-void a_to_b(stacks_t *s) {
+static void a_to_b(stacks_t *s) {
 	int start = s->middleindex - s->chunksize;
 	int end = s->middleindex + s->chunksize;
 
@@ -50,7 +51,7 @@ void a_to_b(stacks_t *s) {
 	}
 }
 
-void b_to_a(stacks_t *s) {
+static void b_to_a(stacks_t *s) {
 	int i = s->stacksize - 1;
 	int down = 0;
 	int up = 0;
@@ -111,3 +112,19 @@ void b_to_a(stacks_t *s) {
 		}
 	}
 }
+
+void print_sol(stacks_t *s) {
+	dlnode_t *cur = s->solution->dummy->next;
+	char *inst[11] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n", "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
+	while (cur != s->solution->dummy) {
+		enum instruction tmp = *(enum instruction *)cur->data;
+		write(1, inst[tmp], ft_strlen(inst[tmp]));
+		cur = cur->next;
+	}
+}
+
+void sort_stacks(stacks_t *s) {
+	a_to_b(s);
+	b_to_a(s);
+}
+

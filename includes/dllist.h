@@ -4,7 +4,6 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
 
 #define INIT_ERR_MSG "dllist_init : invalid argument to function input"
 #define ADDTOP_ERR_MSG "dllist_addtop : invalid argument to function input"

@@ -4,8 +4,8 @@
 #include <stacks.h>
 
 void load_args(stacks_t *s, int argc, char **argv);
-void a_to_b(stacks_t *s);
-void b_to_a(stacks_t *s);
+void print_sol(stacks_t *s);
+void sort_stacks(stacks_t *s);
 void sol_optimize(stacks_t *s);
 
 #endif

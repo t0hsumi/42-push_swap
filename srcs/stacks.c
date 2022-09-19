@@ -5,15 +5,9 @@ void stacks_init(stacks_t *s, int argc) {
 		exit(EXIT_FAILURE);
 	}
 	s->stack_a = malloc(sizeof(dllist_t));
-	if (s->stack_a == NULL) {
-		exit(EXIT_FAILURE);
-	}
 	s->stack_b = malloc(sizeof(dllist_t));
-	if (s->stack_b == NULL) {
-		exit(EXIT_FAILURE);
-	}
 	s->solution = malloc(sizeof(enum instruction));
-	if (s->solution == NULL) {
+	if (!s->stack_a || !s->stack_b || !s->solution) {
 		exit(EXIT_FAILURE);
 	}
 	dllist_init(s->stack_a, sizeof(int));
