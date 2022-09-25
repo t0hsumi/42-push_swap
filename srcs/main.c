@@ -1,7 +1,7 @@
 #include <push_swap.h>
 
 int main(int argc, char **argv) {
-	stacks_t s;
+	t_stacks s;
 	
 	stacks_init(&s, argc);
 	load_args(&s, argc, argv);

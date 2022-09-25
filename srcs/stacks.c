@@ -1,18 +1,18 @@
 #include <stacks.h>
 
-void stacks_init(stacks_t *s, int argc) {
+void stacks_init(t_stacks *s, int argc) {
 	if ((void *)s==NULL) {
 		exit(EXIT_FAILURE);
 	}
-	s->stack_a = malloc(sizeof(dllist_t));
-	s->stack_b = malloc(sizeof(dllist_t));
-	s->solution = malloc(sizeof(enum instruction));
+	s->stack_a = malloc(sizeof(t_dllist ));
+	s->stack_b = malloc(sizeof(t_dllist ));
+	s->solution = malloc(sizeof(enum e_instruction));
 	if (!s->stack_a || !s->stack_b || !s->solution) {
 		exit(EXIT_FAILURE);
 	}
 	dllist_init(s->stack_a, sizeof(int));
 	dllist_init(s->stack_b, sizeof(int));
-	dllist_init(s->solution, sizeof(enum instruction));
+	dllist_init(s->solution, sizeof(enum e_instruction));
 	s->num = (int *)malloc(sizeof(int) * (argc-2));
 	if (s->num == NULL) exit(EXIT_FAILURE);
 	if (argc-1 <= 10) s->n = 5;
@@ -23,7 +23,7 @@ void stacks_init(stacks_t *s, int argc) {
 	s->stacksize = argc-1;
 }
 
-void stacks_dispose(stacks_t *s) {
+void stacks_dispose(t_stacks *s) {
 	dllist_dispose(s->stack_a);
 	dllist_dispose(s->stack_b);
 	dllist_dispose(s->solution);
@@ -37,8 +37,8 @@ void stacks_dispose(stacks_t *s) {
 	s->num = NULL;
 }
 
-void stacks_sa(stacks_t *s) {
-	enum instruction cur = sa;
+void stacks_sa(t_stacks *s) {
+	enum e_instruction cur = sa;
 
 	if ((void *)s == NULL) {
 		write(2, INPUT_ERR, sizeof(INPUT_ERR));
@@ -50,8 +50,8 @@ void stacks_sa(stacks_t *s) {
 	dllist_addlast(s->solution, &cur);
 }
 
-void stacks_sb(stacks_t *s) {
-	enum instruction cur = sb;
+void stacks_sb(t_stacks *s) {
+	enum e_instruction cur = sb;
 
 	if ((void *)s == NULL) {
 		write(2, INPUT_ERR, sizeof(INPUT_ERR));
@@ -63,8 +63,8 @@ void stacks_sb(stacks_t *s) {
 	dllist_addlast(s->solution, &cur);
 }
 
-void stacks_ss(stacks_t *s) {
-	enum instruction cur = ss;
+void stacks_ss(t_stacks *s) {
+	enum e_instruction cur = ss;
 
 	if ((void *)s == NULL) {
 		write(2, INPUT_ERR, sizeof(INPUT_ERR));
@@ -77,8 +77,8 @@ void stacks_ss(stacks_t *s) {
 	dllist_addlast(s->solution, &cur);
 }
 
-void stacks_ra(stacks_t *s) {
-	enum instruction cur = ra;
+void stacks_ra(t_stacks *s) {
+	enum e_instruction cur = ra;
 
 	if ((void *)s == NULL) {
 		write(2, INPUT_ERR, sizeof(INPUT_ERR));
@@ -90,8 +90,8 @@ void stacks_ra(stacks_t *s) {
 	dllist_addlast(s->solution, &cur);
 }
 
-void stacks_rb(stacks_t *s) {
-	enum instruction cur = rb;
+void stacks_rb(t_stacks *s) {
+	enum e_instruction cur = rb;
 
 	if ((void *)s == NULL) {
 		write(2, INPUT_ERR, sizeof(INPUT_ERR));
@@ -103,8 +103,8 @@ void stacks_rb(stacks_t *s) {
 	dllist_addlast(s->solution, &cur);
 }
 
-void stacks_rr(stacks_t *s) {
-	enum instruction cur = rr;
+void stacks_rr(t_stacks *s) {
+	enum e_instruction cur = rr;
 
 	if ((void *)s == NULL) {
 		write(2, INPUT_ERR, sizeof(INPUT_ERR));
@@ -117,8 +117,8 @@ void stacks_rr(stacks_t *s) {
 	dllist_addlast(s->solution, &cur);
 }
 
-void stacks_rra(stacks_t *s) {
-	enum instruction cur = rra;
+void stacks_rra(t_stacks *s) {
+	enum e_instruction cur = rra;
 
 	if ((void *)s == NULL) {
 		write(2, INPUT_ERR, sizeof(INPUT_ERR));
@@ -130,8 +130,8 @@ void stacks_rra(stacks_t *s) {
 	dllist_addlast(s->solution, &cur);
 }
 
-void stacks_rrb(stacks_t *s) {
-	enum instruction cur = rrb;
+void stacks_rrb(t_stacks *s) {
+	enum e_instruction cur = rrb;
 
 	if ((void *)s == NULL) {
 		write(2, INPUT_ERR, sizeof(INPUT_ERR));
@@ -143,8 +143,8 @@ void stacks_rrb(stacks_t *s) {
 	dllist_addlast(s->solution, &cur);
 }
 
-void stacks_rrr(stacks_t *s) {
-	enum instruction cur = rrr;
+void stacks_rrr(t_stacks *s) {
+	enum e_instruction cur = rrr;
 
 	if ((void *)s == NULL) {
 		write(2, INPUT_ERR, sizeof(INPUT_ERR));
@@ -157,8 +157,8 @@ void stacks_rrr(stacks_t *s) {
 	dllist_addlast(s->solution, &cur);
 }
 
-void stacks_pa(stacks_t *s) {
-	enum instruction cur = pa;
+void stacks_pa(t_stacks *s) {
+	enum e_instruction cur = pa;
 	int elem_out;
 
 	if ((void *)s == NULL) {
@@ -172,8 +172,8 @@ void stacks_pa(stacks_t *s) {
 	dllist_addlast(s->solution, &cur);
 }
 
-void stacks_pb(stacks_t *s) {
-	enum instruction cur = pb;
+void stacks_pb(t_stacks *s) {
+	enum e_instruction cur = pb;
 	int elem_out;
 
 	if ((void *)s == NULL) {

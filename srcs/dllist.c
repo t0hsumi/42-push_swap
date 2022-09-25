@@ -1,12 +1,12 @@
 #include <dllist.h>
 #include <utils.h>
 
-void dllist_init(dllist_t *l, size_t elem_size) {
+void dllist_init(t_dllist *l, size_t elem_size) {
 	if ((void *)l == NULL || elem_size <= 0) {
 		write(2, INIT_ERR_MSG, sizeof(INIT_ERR_MSG));
 		exit(EXIT_FAILURE);
 	}
-	l->dummy = malloc(sizeof(dlnode_t));
+	l->dummy = malloc(sizeof(t_dlnode));
 	if (l->dummy == NULL) {
 		write(2, "malloc", 6);
 		exit(EXIT_FAILURE);
@@ -19,14 +19,14 @@ void dllist_init(dllist_t *l, size_t elem_size) {
 	l->dummy->data = NULL;
 }
 
-void dllist_addtop(dllist_t *l, void *elem) {
-	dlnode_t *node;
+void dllist_addtop(t_dllist *l, void *elem) {
+	t_dlnode*node;
 
 	if ((void *)l == NULL || elem == NULL) {
 		write(2, ADDTOP_ERR_MSG, sizeof(ADDTOP_ERR_MSG));
 		exit(EXIT_FAILURE);
 	}
-	node = malloc(sizeof(dlnode_t));
+	node = malloc(sizeof(t_dlnode));
 	if (node == NULL) {
 		write(2, "malloc", 6);
 		exit(EXIT_FAILURE);
@@ -46,14 +46,14 @@ void dllist_addtop(dllist_t *l, void *elem) {
 	ft_memcpy(node->data, elem, l->elem_size);
 }
 
-void dllist_addlast(dllist_t *l, void *elem) {
-	dlnode_t *node;
+void dllist_addlast(t_dllist *l, void *elem) {
+	t_dlnode*node;
 
 	if ((void *)l == NULL || elem == NULL) {
 		write(2, ADDLAST_ERR_MSG, sizeof(ADDLAST_ERR_MSG));
 		exit(EXIT_FAILURE);
 	}
-	node = malloc(sizeof(dlnode_t));
+	node = malloc(sizeof(t_dlnode));
 	if (node == NULL) {
 		write(2, "malloc", 6);
 		exit(EXIT_FAILURE);
@@ -73,7 +73,7 @@ void dllist_addlast(dllist_t *l, void *elem) {
 	ft_memcpy(node->data, elem, l->elem_size);
 }
 
-void dllist_swaptop(dllist_t *l) {
+void dllist_swaptop(t_dllist *l) {
 	if ((void *)l == NULL) {
 		write(2, SWAP_ERR_MSG , sizeof(SWAP_ERR_MSG));
 		exit(EXIT_FAILURE);
@@ -81,7 +81,7 @@ void dllist_swaptop(dllist_t *l) {
 
 	if (l->length < 2)
 		return;
-	dlnode_t *tmp = l->dummy->next->next->next;
+	t_dlnode*tmp = l->dummy->next->next->next;
 	tmp->prev = l->dummy->next;
 	l->dummy->next = l->dummy->next->next;
 	l->dummy->next->next = tmp->prev;
@@ -90,14 +90,14 @@ void dllist_swaptop(dllist_t *l) {
 	tmp->prev->prev = l->dummy->next;
 }
 
-void dllist_rotate(dllist_t *l) {
+void dllist_rotate(t_dllist *l) {
 	if ((void *)l == NULL) {
 		write(2, ROTATE_ERR_MSG , sizeof(ROTATE_ERR_MSG));
 		exit(EXIT_FAILURE);
 	}
 	if (l->length <= 1) return;
-	dlnode_t *right = l->dummy->next->next;
-	dlnode_t *left = l->dummy->prev;
+	t_dlnode*right = l->dummy->next->next;
+	t_dlnode*left = l->dummy->prev;
 
 	left->next = l->dummy->next;
 	left->next->prev = left;
@@ -107,14 +107,14 @@ void dllist_rotate(dllist_t *l) {
 	left->next->next = l->dummy;
 }
 
-void dllist_r_rotate(dllist_t *l) {
+void dllist_r_rotate(t_dllist *l) {
 	if ((void *)l == NULL) {
 		write(2, R_ROTATE_ERR_MSG , sizeof(R_ROTATE_ERR_MSG));
 		exit(EXIT_FAILURE);
 	}
 	if (l->length <= 1) return;
-	dlnode_t *right = l->dummy->next;
-	dlnode_t *left = l->dummy->prev->prev;
+	t_dlnode*right = l->dummy->next;
+	t_dlnode*left = l->dummy->prev->prev;
 
 	right->prev = l->dummy->prev;
 	right->prev->next = right;
@@ -124,7 +124,7 @@ void dllist_r_rotate(dllist_t *l) {
 	right->prev->prev = l->dummy;
 }
 
-void dllist_remove(dllist_t *l, dlnode_t *cur, void *elem_out) {
+void dllist_remove(t_dllist *l, t_dlnode*cur, void *elem_out) {
 	if ((void *)l == NULL || elem_out == NULL) {
 		write(2, REMOVE_ERR_MSG , sizeof(REMOVE_ERR_MSG));
 		exit(EXIT_FAILURE);
@@ -143,9 +143,9 @@ void dllist_remove(dllist_t *l, dlnode_t *cur, void *elem_out) {
 	cur = NULL;
 }
 
-void dllist_dispose(dllist_t *l) {
-	dlnode_t *node;
-	dlnode_t *old_node;
+void dllist_dispose(t_dllist *l) {
+	t_dlnode*node;
+	t_dlnode*old_node;
 
 	if ((void *)l == NULL) {
 		write(2, DISPOSE_ERR_MSG , sizeof(DISPOSE_ERR_MSG));

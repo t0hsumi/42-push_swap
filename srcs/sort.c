@@ -1,6 +1,6 @@
 #include <push_swap.h>
 
-static void a_to_b(stacks_t *s) {
+static void a_to_b(t_stacks *s) {
 	int start = s->middleindex - s->chunksize;
 	int end = s->middleindex + s->chunksize;
 
@@ -29,7 +29,7 @@ static void a_to_b(stacks_t *s) {
 	}
 }
 
-static void b_to_a(stacks_t *s) {
+static void b_to_a(t_stacks *s) {
 	int i = s->stacksize - 1;
 	int down = 0;
 	int up = 0;
@@ -38,7 +38,7 @@ static void b_to_a(stacks_t *s) {
 		int tmp = *(int *)s->stack_b->dummy->next->data;
 
 		size_t b_max_index = 0;
-		dlnode_t *cur = s->stack_b->dummy->next;
+		t_dlnode*cur = s->stack_b->dummy->next;
 		while (cur->data != NULL) {
 			if (*(int *)cur->data == s->num[i])
 				break;
@@ -91,7 +91,7 @@ static void b_to_a(stacks_t *s) {
 	}
 }
 
-void sort_stacks(stacks_t *s) {
+void sort_stacks(t_stacks *s) {
 	if (s->stacksize == 2) {
 		stacks_sa(s);
 		if (*(int *)s->stack_a->dummy->next->data == s->num[1])

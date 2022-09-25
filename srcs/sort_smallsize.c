@@ -1,6 +1,6 @@
 #include <push_swap.h>
 
-static void sort_first(stacks_t *s) {
+static void sort_first(t_stacks *s) {
 	if (*(int *)s->stack_a->dummy->next->next->data == s->num[1]) {
 		stacks_sa(s);
 	} else {
@@ -9,14 +9,14 @@ static void sort_first(stacks_t *s) {
 	stacks_sa(s);
 }
 
-static void sort_second(stacks_t *s) {
+static void sort_second(t_stacks *s) {
 	if (*(int *)s->stack_a->dummy->next->next->data == s->num[0])
 		stacks_sa(s);
 	else
 		stacks_rra(s);
 }
 
-static void sort_third(stacks_t *s) {
+static void sort_third(t_stacks *s) {
 	if (*(int *)s->stack_a->dummy->next->next->data == s->num[0])
 		stacks_ra(s);
 	else {
@@ -25,7 +25,7 @@ static void sort_third(stacks_t *s) {
 	}
 }
 
-void sort_three(stacks_t *s) {
+void sort_three(t_stacks *s) {
 	if (*(int *)s->stack_a->dummy->next->data == s->num[0])
 		sort_first(s);
 	else if (*(int *)s->stack_a->dummy->next->data == s->num[1])
@@ -34,8 +34,8 @@ void sort_three(stacks_t *s) {
 		sort_third(s);
 }
 
-void sort_four(stacks_t *s) {
-	dlnode_t *cur = s->stack_a->dummy->next;
+void sort_four(t_stacks *s) {
+	t_dlnode*cur = s->stack_a->dummy->next;
 
 	while (cur != s->stack_a->dummy) {
 		if (*(int *)cur->data == s->num[3]) {
@@ -50,8 +50,8 @@ void sort_four(stacks_t *s) {
 	stacks_ra(s);
 }
 
-void sort_five(stacks_t *s) {
-	dlnode_t *cur = s->stack_a->dummy->next;
+void sort_five(t_stacks *s) {
+	t_dlnode*cur = s->stack_a->dummy->next;
 	int flag = 0;
 
 	while (cur != s->stack_a->dummy) {

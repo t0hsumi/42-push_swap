@@ -1,17 +1,17 @@
 #include <push_swap.h>
 #include <utils.h>
 
-static void ra_rb(stacks_t *s) {
-	dlnode_t *cur = s->solution->dummy->next;
-	enum instruction RR = rr;
+static void ra_rb(t_stacks *s) {
+	t_dlnode*cur = s->solution->dummy->next;
+	enum e_instruction RR = rr;
 	int elem_out;
 
 	while (cur != s->solution->dummy) {
-		if (*(enum instruction *)cur->data == ra) {
+		if (*(enum e_instruction *)cur->data == ra) {
 			int flag = 0;
-			dlnode_t *tmp = cur->next;
+			t_dlnode*tmp = cur->next;
 			while (tmp != s->solution->dummy) {
-				enum instruction inst = *(enum instruction *)tmp->data;
+				enum e_instruction inst = *(enum e_instruction *)tmp->data;
 				if (inst == rb) {
 					flag = 1;
 					break;
@@ -32,17 +32,17 @@ static void ra_rb(stacks_t *s) {
 	}
 }
 
-static void rra_rrb(stacks_t *s) {
-	dlnode_t *cur = s->solution->dummy->next;
-	enum instruction RRR = rrr;
+static void rra_rrb(t_stacks *s) {
+	t_dlnode*cur = s->solution->dummy->next;
+	enum e_instruction RRR = rrr;
 	int elem_out;
 
 	while (cur != s->solution->dummy) {
-		if (*(enum instruction *)cur->data == rra) {
+		if (*(enum e_instruction *)cur->data == rra) {
 			int flag = 0;
-			dlnode_t *tmp = cur->next;
+			t_dlnode*tmp = cur->next;
 			while (tmp != s->solution->dummy) {
-				enum instruction inst = *(enum instruction *)tmp->data;
+				enum e_instruction inst = *(enum e_instruction *)tmp->data;
 				if (inst == rrb) {
 					flag = 1;
 					break;
@@ -63,17 +63,17 @@ static void rra_rrb(stacks_t *s) {
 	}
 }
 
-static void rb_ra(stacks_t *s) {
-	dlnode_t *cur = s->solution->dummy->next;
-	enum instruction RR = rr;
+static void rb_ra(t_stacks *s) {
+	t_dlnode*cur = s->solution->dummy->next;
+	enum e_instruction RR = rr;
 	int elem_out;
 
 	while (cur != s->solution->dummy) {
-		if (*(enum instruction *)cur->data == rb) {
+		if (*(enum e_instruction *)cur->data == rb) {
 			int flag = 0;
-			dlnode_t *tmp = cur->next;
+			t_dlnode*tmp = cur->next;
 			while (tmp != s->solution->dummy) {
-				enum instruction inst = *(enum instruction *)tmp->data;
+				enum e_instruction inst = *(enum e_instruction *)tmp->data;
 				if (inst == ra) {
 					flag = 1;
 					break;
@@ -94,16 +94,16 @@ static void rb_ra(stacks_t *s) {
 	}
 }
 
-static void rra_ra(stacks_t *s) {
-	dlnode_t *cur = s->solution->dummy->next;
+static void rra_ra(t_stacks *s) {
+	t_dlnode*cur = s->solution->dummy->next;
 	int elem_out;
 
 	while (cur != s->solution->dummy) {
-		if (*(enum instruction *)cur->data == rra) {
+		if (*(enum e_instruction *)cur->data == rra) {
 			int flag = 0;
-			dlnode_t *tmp = cur->next;
+			t_dlnode*tmp = cur->next;
 			while (tmp != s->solution->dummy) {
-				enum instruction inst = *(enum instruction *)tmp->data;
+				enum e_instruction inst = *(enum e_instruction *)tmp->data;
 				if (inst == ra) {
 					flag = 1;
 					break;
@@ -124,16 +124,16 @@ static void rra_ra(stacks_t *s) {
 	}
 }
 
-static void ra_rra(stacks_t *s) {
-	dlnode_t *cur = s->solution->dummy->next;
+static void ra_rra(t_stacks *s) {
+	t_dlnode*cur = s->solution->dummy->next;
 	int elem_out;
 
 	while (cur != s->solution->dummy) {
-		if (*(enum instruction *)cur->data == ra) {
+		if (*(enum e_instruction *)cur->data == ra) {
 			int flag = 0;
-			dlnode_t *tmp = cur->next;
+			t_dlnode*tmp = cur->next;
 			while (tmp != s->solution->dummy) {
-				enum instruction inst = *(enum instruction *)tmp->data;
+				enum e_instruction inst = *(enum e_instruction *)tmp->data;
 				if (inst == rra) {
 					flag = 1;
 					break;
@@ -154,7 +154,7 @@ static void ra_rra(stacks_t *s) {
 	}
 }
 
-void sol_optimize(stacks_t *s) {
+void sol_optimize(t_stacks *s) {
 	ra_rb(s);
 	rb_ra(s);
 	ra_rra(s);
