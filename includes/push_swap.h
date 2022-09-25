@@ -5,6 +5,9 @@
 
 void load_args(stacks_t *s, int argc, char **argv);
 void print_sol(stacks_t *s);
+void sort_three(stacks_t *s);
+void sort_four(stacks_t *s);
+void sort_five(stacks_t *s);
 void sort_stacks(stacks_t *s);
 void sol_optimize(stacks_t *s);
 
