@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:43:22 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/29 12:43:24 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/29 22:59:52 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	stacks_pa(t_stacks *s)
 {
 	enum e_instruction	cur;
-	int					elem_out;
+	t_dlnode			*elem_out;
 
 	cur = pa;
 	if ((void *)s == NULL)
@@ -25,15 +25,22 @@ void	stacks_pa(t_stacks *s)
 	}
 	if (s->stack_b->length == 0)
 		return ;
-	dllist_remove(s->stack_b, s->stack_b->dummy->next, &elem_out);
-	dllist_addtop(s->stack_a, &elem_out);
+	elem_out = s->stack_b->dummy->next;
+	elem_out->next->prev = elem_out->prev;
+	elem_out->prev->next = elem_out->next;
+	elem_out->next = s->stack_a->dummy->next;
+	elem_out->prev = s->stack_a->dummy;
+	elem_out->next->prev = elem_out;
+	elem_out->prev->next = elem_out;
 	dllist_addlast(s->solution, &cur);
+	s->stack_a->length++;
+	s->stack_b->length--;
 }
 
 void	stacks_pb(t_stacks *s)
 {
 	enum e_instruction	cur;
-	int					elem_out;
+	t_dlnode			*elem_out;
 
 	cur = pb;
 	if ((void *)s == NULL)
@@ -43,7 +50,14 @@ void	stacks_pb(t_stacks *s)
 	}
 	if (s->stack_a->length == 0)
 		return ;
-	dllist_remove(s->stack_a, s->stack_a->dummy->next, &elem_out);
-	dllist_addtop(s->stack_b, &elem_out);
+	elem_out = s->stack_a->dummy->next;
+	elem_out->next->prev = elem_out->prev;
+	elem_out->prev->next = elem_out->next;
+	elem_out->next = s->stack_b->dummy->next;
+	elem_out->prev = s->stack_b->dummy;
+	elem_out->next->prev = elem_out;
+	elem_out->prev->next = elem_out;
 	dllist_addlast(s->solution, &cur);
+	s->stack_a->length--;
+	s->stack_b->length++;
 }
