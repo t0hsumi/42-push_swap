@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 12:32:45 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/25 12:32:53 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/29 12:47:08 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,6 @@ void	sort_five(t_stacks *s);
 void	sort_stacks(t_stacks *s);
 void	sol_optimize(t_stacks *s);
 
+void	a_to_b(t_stacks *s);
+void	b_to_a(t_stacks *s);
 #endif

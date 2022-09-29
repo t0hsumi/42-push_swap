@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   opitimze.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 22:02:43 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/29 12:47:15 by tohsumi          ###   ########.fr       */
+/*   Created: 2022/09/28 11:51:03 by tohsumi           #+#    #+#             */
+/*   Updated: 2022/09/28 12:41:42 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
+#include <utils.h>
 
-void	sort_stacks(t_stacks *s)
+void	sol_optimize(t_stacks *s)
 {
-	if (s->stacksize == 2)
-	{
-		stacks_sa(s);
-		if (*(int *)s->stack_a->dummy->next->data == s->num[1])
-			stacks_sa(s);
-	}
-	else if (s->stacksize == 3)
-		sort_three(s);
-	else if (s->stacksize == 4)
-		sort_four(s);
-	else if (s->stacksize == 5)
-		sort_five(s);
-	else
-	{
-		a_to_b(s);
-		b_to_a(s);
-	}
+	ra_rb(s);
+	rb_ra(s);
+	ra_rra(s);
+	rra_ra(s);
+	rra_rrb(s);
+	return ;
 }

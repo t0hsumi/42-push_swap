@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 12:43:26 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/25 23:10:41 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/29 12:52:49 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,21 @@ char	*ft_strdup(const char *s1)
 		return (NULL);
 	ft_memcpy(ptr, s1, ft_strlen(s1) + 1);
 	return (ptr);
+}
+
+size_t	find_elem_location(t_stacks *s, int index)
+{
+	t_dlnode	*cur;
+	size_t		res;
+
+	res = 0;
+	cur = s->stack_b->dummy->next;
+	while (cur->data != NULL)
+	{
+		if (*(int *)cur->data == s->num[index])
+			break ;
+		res++;
+		cur = cur->next;
+	}
+	return (res);
 }

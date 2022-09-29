@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   sort_four.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 22:02:43 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/29 12:47:15 by tohsumi          ###   ########.fr       */
+/*   Created: 2022/09/29 12:40:32 by tohsumi           #+#    #+#             */
+/*   Updated: 2022/09/29 12:40:34 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	sort_stacks(t_stacks *s)
+void	sort_four(t_stacks *s)
 {
-	if (s->stacksize == 2)
+	t_dlnode	*cur;
+
+	cur = s->stack_a->dummy->next;
+	while (cur != s->stack_a->dummy)
 	{
-		stacks_sa(s);
-		if (*(int *)s->stack_a->dummy->next->data == s->num[1])
-			stacks_sa(s);
+		if (*(int *)cur->data == s->num[3])
+		{
+			stacks_pb(s);
+			break ;
+		}
+		cur = cur->next;
+		stacks_ra(s);
 	}
-	else if (s->stacksize == 3)
-		sort_three(s);
-	else if (s->stacksize == 4)
-		sort_four(s);
-	else if (s->stacksize == 5)
-		sort_five(s);
-	else
-	{
-		a_to_b(s);
-		b_to_a(s);
-	}
+	sort_three(s);
+	stacks_pa(s);
+	stacks_ra(s);
 }
