@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 12:02:14 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/28 12:33:00 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/29 13:14:46 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	dllist_remove(t_dllist *l, t_dlnode*cur, void *elem_out)
 	}
 	cur->prev->next = cur->next;
 	cur->next->prev = cur->prev;
-	ft_memcpy(elem_out, cur->data, l->elem_size);
+	ft_memmove(elem_out, cur->data, l->elem_size);
 	--l->length;
 	free(cur->data);
 	cur->data = NULL;

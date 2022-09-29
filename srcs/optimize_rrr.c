@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:36:56 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/29 12:36:58 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/29 13:14:47 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	rra_rrb(t_stacks *s)
 			if (tmp)
 			{
 				dllist_remove(s->solution, tmp, &elem_out);
-				ft_memcpy(cur->data, &replace, s->solution->elem_size);
+				ft_memmove(cur->data, &replace, s->solution->elem_size);
 			}
 		}
 		cur = cur->next;

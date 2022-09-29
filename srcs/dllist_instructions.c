@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:33:04 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/28 12:33:07 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/29 13:14:46 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	dllist_addtop(t_dllist *l, void *elem)
 	node->prev->next = node;
 	node->next->prev = node;
 	++l->length;
-	ft_memcpy(node->data, elem, l->elem_size);
+	ft_memmove(node->data, elem, l->elem_size);
 }
 
 void	dllist_addlast(t_dllist *l, void *elem)
@@ -68,7 +68,7 @@ void	dllist_addlast(t_dllist *l, void *elem)
 	l->dummy->prev->next = node;
 	l->dummy->prev = node;
 	++l->length;
-	ft_memcpy(node->data, elem, l->elem_size);
+	ft_memmove(node->data, elem, l->elem_size);
 }
 
 void	dllist_swaptop(t_dllist *l)
