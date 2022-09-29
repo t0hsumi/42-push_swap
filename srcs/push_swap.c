@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:34:48 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/28 11:01:22 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/29 13:34:27 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,18 @@ static void	inst_init(char **inst)
 	inst[10] = ft_strdup("rrr\n");
 }
 
-static void	inst_dispose(char ***inst)
+static void	inst_dispose(char **inst)
 {
 	int	i;
 
 	i = 0;
 	while (i < 11)
 	{
-		free(*inst[i]);
-		*inst[i++] = NULL;
+		free(inst[i]);
+		inst[i++] = NULL;
 	}
-	free(*inst);
-	*inst = NULL;
+	free(inst);
+	inst = NULL;
 }
 
 void	print_sol(t_stacks *s)
@@ -78,11 +78,11 @@ void	print_sol(t_stacks *s)
 	if (!inst)
 		exit(EXIT_FAILURE);
 	inst_init(inst);
-	while (cur != s->solution->dummy)
+	while (cur->data != NULL)
 	{
 		tmp = *(enum e_instruction *)cur->data;
 		write(1, inst[tmp], ft_strlen(inst[tmp]));
 		cur = cur->next;
 	}
-	inst_dispose(&inst);
+	inst_dispose(inst);
 }
