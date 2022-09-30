@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:34:48 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/29 13:34:27 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/30 10:25:41 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 #include <stdlib.h>
 #include <utils.h>
 #include <limits.h>
+
+static int	is_duplicates(int *num, int nelms)
+{
+	int	i;
+
+	i = 0;
+	while (i < nelms - 1)
+	{
+		if (num[i] == num[i + 1])
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	load_args(t_stacks *s, int argc, char **argv)
 {
@@ -36,6 +50,12 @@ void	load_args(t_stacks *s, int argc, char **argv)
 		s->num[i - 1] = tmp;
 	}
 	quicksort(s->num, 0, argc - 1);
+	if (is_duplicates(s->num, argc - 1))
+	{
+			write(2, "Error\n", 6);
+			stacks_dispose(s);
+			exit(EXIT_FAILURE);
+	}
 }
 
 static void	inst_init(char **inst)
