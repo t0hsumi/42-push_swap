@@ -63,8 +63,6 @@ static void	inst_dispose(char **inst)
 		free(inst[i]);
 		inst[i++] = NULL;
 	}
-	free(inst);
-	inst = NULL;
 }
 
 void	print_sol(t_stacks *s)
@@ -85,4 +83,6 @@ void	print_sol(t_stacks *s)
 		cur = cur->next;
 	}
 	inst_dispose(inst);
+	free(inst);
+	inst = NULL;
 }

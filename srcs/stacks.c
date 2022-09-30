@@ -18,13 +18,13 @@ void	stacks_init(t_stacks *s, int argc)
 		exit(EXIT_FAILURE);
 	s->stack_a = malloc(sizeof(t_dllist));
 	s->stack_b = malloc(sizeof(t_dllist));
-	s->solution = malloc(sizeof(enum e_instruction));
+	s->solution = malloc(sizeof(t_dllist));
 	if (!s->stack_a || !s->stack_b || !s->solution)
 		exit(EXIT_FAILURE);
 	dllist_init(s->stack_a, sizeof(int));
 	dllist_init(s->stack_b, sizeof(int));
 	dllist_init(s->solution, sizeof(enum e_instruction));
-	s->num = (int *)malloc(sizeof(int) * (argc - 2));
+	s->num = (int *)malloc(sizeof(int) * (argc - 1));
 	if (s->num == NULL)
 		exit(EXIT_FAILURE);
 	if (argc - 1 <= 10)
