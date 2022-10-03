@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 12:20:07 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/25 12:39:51 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/30 18:50:48 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,25 @@ typedef struct t_stacks {
 	t_dllist	*solution;
 }	t_stacks;
 
+/* stacks.c */
 void	stacks_init(t_stacks *s, int argc);
 void	stacks_dispose(t_stacks *s);
 
+/* stacks_swap_inst.c */
 void	stacks_sa(t_stacks *s);
 void	stacks_sb(t_stacks *s);
 void	stacks_ss(t_stacks *s);
+
+/* stacks_push_inst.c */
 void	stacks_pa(t_stacks *s);
 void	stacks_pb(t_stacks *s);
+
+/* stacks_rotate_inst.c */
 void	stacks_ra(t_stacks *s);
 void	stacks_rb(t_stacks *s);
 void	stacks_rr(t_stacks *s);
+
+/* stacks_rev_rotate_inst.c */
 void	stacks_rra(t_stacks *s);
 void	stacks_rrb(t_stacks *s);
 void	stacks_rrr(t_stacks *s);

@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:36:47 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/29 13:14:46 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/30 18:37:27 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ static t_dlnode	*find_rb(t_stacks *s, t_dlnode *cur)
 		return (tmp);
 }
 
+/*
+   The instruction sequence ra -> rb can be abbrviated rr.
+   ra -> ... -> rb  =>  rr -> ... -> nop
+*/
 void	ra_rb(t_stacks *s)
 {
 	t_dlnode			*cur;
@@ -81,6 +85,10 @@ static t_dlnode	*find_ra(t_stacks *s, t_dlnode *cur)
 		return (tmp);
 }
 
+/*
+   The instruction sequence rb -> ra can be abbrviated rr.
+   rb -> ... -> ra  =>  rr -> ... -> nop
+*/
 void	rb_ra(t_stacks *s)
 {
 	t_dlnode			*cur;

@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:34:48 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/30 10:25:41 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/30 18:30:33 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	load_args(t_stacks *s, int argc, char **argv)
 	quicksort(s->num, 0, argc - 1);
 	if (is_duplicates(s->num, argc - 1))
 	{
-			write(2, "Error\n", 6);
-			stacks_dispose(s);
-			exit(EXIT_FAILURE);
+		write(2, "Error\n", 6);
+		stacks_dispose(s);
+		exit(EXIT_FAILURE);
 	}
 }
 

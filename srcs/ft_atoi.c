@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:55:42 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/26 11:55:43 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/30 18:41:16 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static int	ft_isdigit(int c)
 	return ('0' <= c && c <= '9');
 }
 
+/*
+    ft_atoi() is similar to atoi() in libc, except that it returns LONG_MIN
+	when input char contains non digital number or overflow.
+*/
 long	ft_atoi(const char *nptr)
 {
 	long int	res;

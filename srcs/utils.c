@@ -6,7 +6,7 @@
 /*   By: tohsumi <tohsumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 12:43:26 by tohsumi           #+#    #+#             */
-/*   Updated: 2022/09/29 13:20:03 by tohsumi          ###   ########.fr       */
+/*   Updated: 2022/09/30 18:42:58 by tohsumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ char	*ft_strdup(const char *s1)
 	return (ptr);
 }
 
+/*
+   search s->num[index] for s->stack_b and return that position
+*/
 size_t	find_elem_location(t_stacks *s, int index)
 {
 	t_dlnode	*cur;
