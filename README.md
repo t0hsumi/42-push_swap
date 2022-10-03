@@ -6,7 +6,7 @@ Sort a random list of integers on two stacks, with a limited set of instructions
 
 Create the programs `push_swap`.
 
-This program takes a list of integers as input from command line argument,
+This program takes a list of integers as input from a command line argument,
 and calculates the instructions to sort these integers
 and displays those instructions on stdout or, in case of an error,
 `Error\n` on stderr.
@@ -26,7 +26,7 @@ sorted in ascending order.
 - `sb` : swap b - swap the first 2 elements at the top of stack b.
   Do nothing if there is only one or no elements).
 - `ss` : `sa` and `sb` at the same time.
-- `pa` : push a - take the first element at the top of b and put it at the top of a. Donothing if b is empty.
+- `pa` : push a - take the first element at the top of b and put it at the top of a. Do nothing if b is empty.
 - `pb` : push b - take the first element at the top of a and put it at the top of b. Do nothing if a is empty.
 - `ra` : rotate a - shift up all elements of stack a by 1.
   The first element becomes the last one.
@@ -40,7 +40,7 @@ The first element becomes the last one.
 - `rrr` : `rra` and `rrb` at the same time.
 
 [This page](https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a)
-illustrates what each instructions do.
+illustrates what each instruction does.
 
 ### misc
 - I can use `read`, `write`, `malloc`, `free`, and `exit`,
@@ -72,10 +72,10 @@ This is what this whole program does in the sorting process.
 ![](images/push_swap.gif)
 credit goes to [Ilya Kashnitskiy](https://github.com/elijahkash/push_swap_gui) for this gif
 
-This program is something like the combination of quicksort and mergesort.
+This program is something like a combination of quicksort and mergesort.
 The whole algorithm consists of two main stages:
 1. Pushing numbers from a to b.
-     - During this stage, this algorithm sort the number raughly in descending order.
+     - During this stage, this algorithm sort the number roughly in descending order.
 2. Pushing them back to a.
      - During this stage, sort numbers in exactly ascending order.
 
