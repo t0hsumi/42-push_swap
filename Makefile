@@ -37,4 +37,4 @@ debug: re
 leak: CFLAGS += $(DEBUG_FLAGS)
 leak: re
 
-PHONY: all clean fclean re
+.PHONY: all clean fclean re
